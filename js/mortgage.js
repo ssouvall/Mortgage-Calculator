@@ -81,8 +81,7 @@ function buildPaymentSchedule(obj) {
         })
     };
     displayData(paymentArray);
-    drawStats(paymentArray)
-    // chart(paymentArray)
+    drawStats(paymentArray);
 };
 
 function displayData(array) {
@@ -140,16 +139,6 @@ function displayData(array) {
     };
 };
 
-
-//draw the chart
-// function chart(arr) {
-//     google.charts.load('current', {
-//         'packages': ['corechart']
-//     });
-//     google.charts.setOnLoadCallback(drawChart(arr));
-
-// }
-
 function drawStats(array) {
 
     let principalArr = array.map(payment => payment.principalPayment);
@@ -178,32 +167,3 @@ function drawStats(array) {
     );
 
 };
-
-//build results chart
-// function drawChart(arr) {
-//     arr.forEach(entry => {
-//         let entryArr = [];
-//         entryArr.push(arr.totalInterest, arr.totalPrincipal, arr.loanBalance)
-//         console.log(entryArr)
-//     });
-// var data = google.visualization.arrayToDataTable([
-//     ['Principal', 'Interest', 'Loan Balance'],
-//     results
-// ]);
-
-// var options = {
-//     title: 'Company Performance',
-//     hAxis: {
-//         title: 'Year',
-//         titleTextStyle: {
-//             color: '#333'
-//         }
-//     },
-//     vAxis: {
-//         minValue: 0
-//     }
-// };
-
-// var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-// chart.draw(data, options);
-// }

@@ -53,6 +53,11 @@ h5 {
   background-color: #333;
 }
 
+.btn:active {
+  background-color: #056CF2;
+  border: none;
+}
+
 @media(max-width: 768px) {
   .hero-div {
     text-align: center;
@@ -234,6 +239,20 @@ code {
 
 table {
   max-width: 100%;
+}
+
+@media(max-width: 768px) {
+
+  #newLoanForm {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .code-container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
 }
 
 .footer {
