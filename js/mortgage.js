@@ -49,6 +49,16 @@ function getPaymentAmount() {
 };
 
 function buildPaymentSchedule(obj) {
+    let isValid = validateForm();
+    if (!isValid) {
+        Swal.fire(
+            'Error',
+            'Please enter a value greater than zero in all fields',
+            'error'
+        );
+        return false;
+    }
+
     let paymentArray = [];
 
     let loanTerm = obj.term;
@@ -167,3 +177,13 @@ function drawStats(array) {
     );
 
 };
+
+function validateForm() {
+    let amount = +document.getElementById('loanAmount').value;
+    let term = +document.getElementById('loanTerm').value;
+    let rate = +document.getElementById('loanRate').value;
+
+    let isValid = [amount, term, rate].every((field) => field > 0);
+
+    return isValid;
+}
