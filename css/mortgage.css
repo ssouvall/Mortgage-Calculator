@@ -114,7 +114,7 @@ nav li {
   position: relative;
 }
 
-@media(min-width: 768px) {
+@media(min-width: 1024px) {
   .nav-animate::before {
     transition: 300ms;
     height: 5px;
