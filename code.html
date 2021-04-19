@@ -122,6 +122,8 @@ function getUserInput() {
         undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
+            style: 'currency',
+            currency: 'USD',
         })}`;
 
     let loanInfo = {
@@ -136,50 +138,152 @@ function getUserInput() {
             </div>
           </div>
            <div class="row">
-              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#tableTransition"></button>
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#tableTransition">Build the Payment Schedule</button>
             </div>
           <div class="row">
             <div id="tableTransition" class="col card card-body collapse">
-              <h5 class="card-title">Create a function that will disappear the user form and make the results table appear.</h5>
+              <h5 class="card-title">Create an Amortization Schedule Based on the User Input</h5>
+              <p>This function takes an object as an argument and fills the amortization schedule table with payment data. In this case the function is being passed the loanInfo object from the getPaymentAmount() function. The function saves all key:value pairs in the argument object to local variables, then also initializes an empty paymentArray and the necessary variables to calculate total interest, loan cost, balance, and principal. The function then sets up a for loop set to loop the number of months of the loan term. This loop calculates all fields of the payment schedule table, and pushes them to the paymentArray. Finally, the displayData() and drawStats() functions are called with the paymentArray as an argument.</p>
 <pre class="line-numbers">
-<code class="language-javascript">
-  //disappear form, appear table
-  function tableTransition() {
-      let form = document.getElementById("form-div");
-      let table = document.getElementById("resultDiv");
-      //make form disappear
-      form.classList.add("invisible");
-      //make result table appear with results
-      table.classList.remove("invisible");
-  }
-</code>
+<code class="language-javascript">function buildPaymentSchedule(obj) {
+    let paymentArray = [];
+
+    let loanTerm = obj.term;
+    let payment = obj.monthlyPayment;
+    let rate = obj.interestRate;
+    let totalLoan = obj.loanBalance;
+    let totalInterest = 0;
+    let totalPrincipal = 0
+    let loanBalance = totalLoan;
+    let principalPayment = 0;
+    let monthlyInterest = 0;
+    let month = 0;
+
+    for (let i = 0; i < loanTerm; i++) {
+        monthlyInterest = rate * loanBalance;
+        principalPayment = payment - monthlyInterest;
+        loanBalance -= (principalPayment)
+        month++
+        totalInterest += monthlyInterest;
+        totalPrincipal += principalPayment;
+        paymentArray.push({
+            month,
+            payment,
+            monthlyInterest,
+            totalInterest,
+            totalPrincipal,
+            principalPayment,
+            loanBalance
+        })
+    };
+    displayData(paymentArray);
+    drawStats(paymentArray)
+};</code>
 </pre>
             </div>
           </div>
           <div class="row">
-              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#printNumbers">Print the Numbers</button>
+              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#printNumbers">Display the Data</button>
             </div>
           <div class="row">
             <div id="printNumbers" class="col card card-body collapse">
-              <h5 class="card-title">Add a "click" event listener to the submit button. When clicked, the function takes the user's chosen range and chosen "fizz" and "buzz" numbers, and calls displayData with these as arguments. It also calls the tableTransition function.</h5>
-
+              <h5 class="card-title">Display the Data in a dynamic Table</h5>
+              <p>This function takes the paymentArray from the buildPaymentSchedule() function and builds that data into a visual dynamic table. This is accomplished by connecting to the ID's of td elements created within an html template tag on the app.html document. The function also gets the tbody field with id="resultsBody" and saves it to a variable. Using a for loop, the data from the paymentArray is distributed in td elements in the table.</p>
 <pre class="line-numbers">
-  <code class="language-javascript">
-  document.getElementById("submitBtn").addEventListener("click", printNumbers)
+  <code class="language-javascript">function displayData(array) {
+    const template = document.getElementById('data-template');
+    const resultsBody = document.getElementById('resultsBody');
 
-  //Take user input and print numbers to the page
-  function printNumbers() {
-      //get user inputs for range
-      let startNum = parseInt(document.getElementById("numOne").value);
-      let endNum = parseInt(document.getElementById("numTwo").value);
-      //get user inputs for "fizz" and "buzz" numbers
-      let fizz = parseInt(document.getElementById("fizz").value);
-      let buzz = parseInt(document.getElementById("buzz").value)
-      let numbers = getRange(startNum, endNum);
-      displayData(numbers, fizz, buzz);
-      tableTransition();
-  };
-</code>
+    resultsBody.innerHTML = "";
+
+    for (let i = 0; i < array.length; i++) {
+        const dataRow = document.importNode(template.content, true);
+
+        dataRow.getElementById("month").textContent = (array[i].month)
+        dataRow.getElementById("payment").textContent = (array[i].payment).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
+            }
+        );
+        dataRow.getElementById("principal").textContent = (array[i].principalPayment).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
+            }
+        );
+        dataRow.getElementById("interest").textContent = (array[i].monthlyInterest).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
+            }
+        );
+        dataRow.getElementById("tot_interest").textContent = (array[i].totalInterest).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
+            }
+        );
+        dataRow.getElementById("balance").textContent = (Math.abs(array[i].loanBalance)).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
+
+            }
+        );
+        resultsBody.appendChild(dataRow);
+    };
+ };</code>
+</pre>
+            </div>
+          </div>
+
+          <div class="row">
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#statsdiv">Update the Stats Div</button>
+            </div>
+          <div class="row">
+            <div id="statsdiv" class="col card card-body collapse">
+              <h5 class="card-title">Update Total Interest, Total Principal, and Total Loan Cost</h5>
+              <p>The final function of the application takes in the paymentArray from buildPaymentSchedule() and uses it to calculate total interest, principal, and loan cost and dynamically update the relevant fields in the stats div. In both cases, the arr.reduce method is utilized to sum the contents of the specified values.</p>
+<pre class="line-numbers">
+<code class="language-javascript">function drawStats(array) {
+
+    let principalArr = array.map(payment => payment.principalPayment);
+    let interestArr = array.map(payment => payment.monthlyInterest);
+    let totalPrincipal = principalArr.reduce((a, b) => a + b, 0);
+    let totalInterest = interestArr.reduce((a, b) => a + b, 0);
+
+    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+
+    document.getElementById("totalCost").innerHTML = (totalInterest + totalPrincipal).toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+
+};</code>
 </pre>
             </div>
           </div>

@@ -127,15 +127,15 @@ function displayData(array) {
                 currency: 'USD',
             }
         );
-        dataRow.getElementById("balance").textContent = (array[i].loanBalance).toLocaleString(
+        dataRow.getElementById("balance").textContent = (Math.abs(array[i].loanBalance)).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
                 style: 'currency',
                 currency: 'USD',
+
             }
         );
-
         resultsBody.appendChild(dataRow);
     };
 };
