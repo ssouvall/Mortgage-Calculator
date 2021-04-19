@@ -72,21 +72,21 @@
             <div class="group col-lg-3">
               <form id="newLoanForm">
                 <div class="form-group row">
-                  <label for="loanAmount" class="form col-sm-4 col-form-label">Amount</label>
+                  <label for="loanAmount" class="form col-sm-4 col-form-label">Loan Amount</label>
                   <div class="col-sm-8">
-                    <input id="loanAmount" type="number" min="1" step="any" placeholder="25,000">
+                    <input id="loanAmount" type="number" min="1" step="any" placeholder="Loan Amount ($)">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="loanTerm" class="form col-sm-4 col-form-label">Term (years)</label>
                   <div class="col-sm-8">
-                    <input id="loanTerm" type="number" min="1" placeholder="5">
+                    <input id="loanTerm" type="number" min="1" placeholder="Term (Years)">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="loanRate" class="form col-sm-4 col-form-label">Rate (%)</label>
+                  <label for="loanRate" class="form col-sm-4 col-form-label">Interest Rate (%)</label>
                   <div class="col-sm-8">
-                    <input id="loanRate" type="number" min="1" step="any" placeholder="5">
+                    <input id="loanRate" type="number" min="1" step="any" placeholder="Interest Rate (%)">
                   </div>
                 </div>
                 <button type="button" class="btn btn-primary" id="submitBtn" onclick="getUserInput()">Submit!</button>
@@ -99,7 +99,7 @@
                     <th colspan="2"><h3>Your Monthly Payments</h3></th>
                   </tr>
                   <tr>
-                    <th colspan="2"><h4 id="monthlyPayment">$500</h4></th>
+                    <th colspan="2"><h4 id="monthlyPayment">$0</h4></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,7 +108,7 @@
                       Total Principal:
                     </td>
                     <td id="totalPrincipal" class="result">
-                      $20,000
+                      $0
                     </td>
                   </tr>
                   <tr>
@@ -116,7 +116,7 @@
                       Total Interest:
                     </td>
                     <td id="totalInterest" class="result">
-                      $3,000
+                      $0
                     </td>
                   </tr>
                   <tr>
@@ -124,14 +124,18 @@
                       Total Cost:
                     </td>
                     <td id="totalCost" class="result">
-                      $23,000
+                      $0
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
+          <!-- <div class="row">
+            <div id="chart_div" style="width: 100%; height: 500px;" class="col">
+              
+            </div>
+          </div> -->
           <div class="row">
             <div class="col">
               <table class="table">
@@ -187,8 +191,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- GSAP CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- PrismJS -->
     <script src="/js/prism.js"></script>
     <!-- Custom JavaScript -->

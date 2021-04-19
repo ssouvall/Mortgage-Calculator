@@ -3,7 +3,7 @@ let loanArray = [];
 
 //Get user input from form
 function getUserInput() {
-    let loanDetails = JSON.parse(localStorage.getItem("loanArray")) || [];
+    // let loanDetails = JSON.parse(localStorage.getItem("loanArray")) || [];
 
     let obj = {};
     obj["amount"] = parseInt(document.getElementById("loanAmount").value);
@@ -12,7 +12,7 @@ function getUserInput() {
 
     loanArray.push(obj);
 
-    localStorage.setItem("loanArray", JSON.stringify(loanDetails));
+    // localStorage.setItem("loanArray", JSON.stringify(loanDetails));
     getPaymentAmount()
 };
 
@@ -32,13 +32,19 @@ function getPaymentAmount() {
 
     monthlyPayment = (loanAmount * interestRate) / (1 - Math.pow(1 + interestRate, -months))
 
+    //post monthly payment to app table
+    document.getElementById("monthlyPayment").innerHTML = `$${monthlyPayment.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })}`;
+
     let loanInfo = {
         monthlyPayment: monthlyPayment,
         interestRate: interestRate,
         term: months,
         loanBalance: loanAmount
     };
-
     buildPaymentSchedule(loanInfo);
 };
 
@@ -49,6 +55,8 @@ function buildPaymentSchedule(obj) {
     let payment = obj.monthlyPayment;
     let rate = obj.interestRate;
     let totalLoan = obj.loanBalance;
+    let totalInterest = 0;
+    let totalPrincipal = 0
     let loanBalance = totalLoan;
     let principalPayment = 0;
     let monthlyInterest = 0;
@@ -60,15 +68,21 @@ function buildPaymentSchedule(obj) {
         principalPayment = payment - monthlyInterest;
         loanBalance -= (principalPayment)
         month++
+        totalInterest += monthlyInterest;
+        totalPrincipal += principalPayment;
         paymentArray.push({
             month,
             payment,
             monthlyInterest,
+            totalInterest,
+            totalPrincipal,
             principalPayment,
             loanBalance
         })
     };
-    displayData(paymentArray)
+    displayData(paymentArray);
+    drawStats(paymentArray)
+    // chart(paymentArray)
 };
 
 function displayData(array) {
@@ -99,7 +113,12 @@ function displayData(array) {
                 maximumFractionDigits: 2,
             }
         );
-        dataRow.getElementById("tot_interest").textContent = "TBD";
+        dataRow.getElementById("tot_interest").textContent = (array[i].totalInterest).toLocaleString(
+            undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }
+        );
         dataRow.getElementById("balance").textContent = (array[i].loanBalance).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
@@ -107,6 +126,78 @@ function displayData(array) {
             }
         );
 
+        if (array[i].loanBalance < 0.01) {
+            array[i].loanBalance = +0.00;
+        }
+
         resultsBody.appendChild(dataRow);
     };
 };
+
+
+//draw the chart
+// function chart(arr) {
+//     google.charts.load('current', {
+//         'packages': ['corechart']
+//     });
+//     google.charts.setOnLoadCallback(drawChart(arr));
+
+// }
+
+function drawStats(array) {
+
+    let principalArr = array.map(payment => payment.principalPayment);
+    let interestArr = array.map(payment => payment.monthlyInterest);
+    let totalPrincipal = principalArr.reduce((a, b) => a + b, 0);
+    let totalInterest = interestArr.reduce((a, b) => a + b, 0);
+
+    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+
+    document.getElementById("totalCost").innerHTML = (totalInterest + totalPrincipal).toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }
+    );
+
+};
+
+//build results chart
+// function drawChart(arr) {
+//     arr.forEach(entry => {
+//         let entryArr = [];
+//         entryArr.push(arr.totalInterest, arr.totalPrincipal, arr.loanBalance)
+//         console.log(entryArr)
+//     });
+// var data = google.visualization.arrayToDataTable([
+//     ['Principal', 'Interest', 'Loan Balance'],
+//     results
+// ]);
+
+// var options = {
+//     title: 'Company Performance',
+//     hAxis: {
+//         title: 'Year',
+//         titleTextStyle: {
+//             color: '#333'
+//         }
+//     },
+//     vAxis: {
+//         minValue: 0
+//     }
+// };
+
+// var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+// chart.draw(data, options);
+// }
