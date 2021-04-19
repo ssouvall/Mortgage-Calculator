@@ -85,12 +85,6 @@ h5 {
   }
 }
 
-
-#app-hero {
-  height: 15%;
-  width: auto;
-}
-
 .intro {
   padding-top: 70px;
   text-align: center;
@@ -245,6 +239,7 @@ code {
 
 .group {
   border: solid 2px black;
+  border-radius: 10px;
   margin: 3% 1%;
   padding: 3% 1%;
 }
@@ -262,4 +257,8 @@ code {
 #logo2 {
   height: auto;
   width: 100%;
+}
+
+table {
+  max-width: 100%;
 }

@@ -67,33 +67,33 @@
     <!-- Begin page content -->
     <main role="main" class="app-main">
       <h3>Enter Your Loan Information Below</h3>
-        <div class="container-fluid">
+        <div class="container">
           <div class="app-row row">
-            <div class="group col-lg-3">
+            <div class="group col-lg-4 col-md-5 bg-dark text-white">
               <form id="newLoanForm">
                 <div class="form-group row">
-                  <label for="loanAmount" class="form col-sm-4 col-form-label">Loan Amount</label>
+                  <label for="loanAmount" class="col-sm-4 col-form-label">Loan Amount</label>
                   <div class="col-sm-8">
-                    <input id="loanAmount" type="number" min="1" step="any" placeholder="Loan Amount ($)">
+                    <input id="loanAmount" class="form-control" type="number" min="1" step="any" placeholder="Loan Amount ($)">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="loanTerm" class="form col-sm-4 col-form-label">Term (years)</label>
+                  <label for="loanTerm" class="col-sm-4 col-form-label">Term (years)</label>
                   <div class="col-sm-8">
-                    <input id="loanTerm" type="number" min="1" placeholder="Term (Years)">
+                    <input id="loanTerm" class="form-control" type="number" min="1" placeholder="Term (Years)">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="loanRate" class="form col-sm-4 col-form-label">Interest Rate (%)</label>
+                  <label for="loanRate" class="col-sm-4 col-form-label">Interest Rate (%)</label>
                   <div class="col-sm-8">
-                    <input id="loanRate" type="number" min="1" step="any" placeholder="Interest Rate (%)">
+                    <input id="loanRate" class="form-control" type="number" min="1" step="any" placeholder="Interest Rate (%)">
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary" id="submitBtn" onclick="getUserInput()">Submit!</button>
+                <button type="button" class="btn btn-primary float-right mb-3" id="submitBtn" onclick="getUserInput()">Submit!</button>
               </form>
             </div>
-            <div class="group col-lg-8">
-              <table class="table borderless">
+            <div class="group col-lg-7 col-md-6 bg-dark text-white">
+              <table class="table borderless text-white">
                 <thead>
                   <tr>
                     <th colspan="2"><h3>Your Monthly Payments</h3></th>
@@ -131,14 +131,16 @@
               </table>
             </div>
           </div>
+        </div>
           <!-- <div class="row">
             <div id="chart_div" style="width: 100%; height: 500px;" class="col">
               
             </div>
           </div> -->
+        <div class="container">
           <div class="row">
-            <div class="col">
-              <table class="table">
+            <div class="col-12">
+              <table class="table table-striped">
                 <thead class="thead-dark">
                   <tr>
                     <th>Month</th>
