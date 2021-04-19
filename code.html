@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>SuperDog - Stephen Souvall</title>
+
+    <link rel="canonical" href="//getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="/css/superDog.css">
+  </head>
+
+  <body>
+
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-custom">
+        <a id="navbar-brand" class="navbar-brand" href="#"><span><img id="logo" src="/img/Mortgage manager.png" alt="mortgage"></span></a>        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item nav-animate">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item nav-animate">
+              <a class="nav-link" href="app.html">The App</a>
+            </li>
+            <li class="nav-item  nav-animate active">
+                <a class="nav-link" href="code.html">See The Code <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item nav-animate">
+                <a class="nav-link" href="//github.com/ssouvall/superDog.git">Get The Code</a>
+            </li>
+            <li class="nav-item nav-animate">
+                <a class="nav-link" href="about.html">About The Developer</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="nav-link nav-social-buttons">
+                    <a href="https://github.com/ssouvall"><i class="fab fa-github fa-lg nav-icons"></i></a>
+                    <a href="https://twitter.com/SouvallStephen"><i class="fab fa-twitter fa-lg nav-icons"></i></a>
+                    <a href="https://www.linkedin.com/in/stephen-souvall-bbb77116/"><i class="fab fa-linkedin-in fa-lg nav-icons"></i></a>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+        <h1 class="intro">Click the Buttons to See the Code!</h1>
+        <br>
+        <div class="col">
+            <hr class="page-break">
+        </div>
+        <div class="container">
+          <div class="row">
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#getRange">Get the Range</button>
+            </div>
+          <div class="row">
+            <div id="getRange" class="col card card-body collapse">
+              <h5 class="card-title">Create a function that takes a start and end number as arguments, and creates an array of numbers containing both arguments and all numbers between them.</h5>
+<pre class="line-numbers">
+<code class="language-javascript">
+  //Gets the range of numbers
+  function getRange(start, end) {
+      let numbersArray = [];
+      for (let i = start; i &lt;= end; i++) {
+          numbersArray.push(i);
+      }
+      return numbersArray;
+  };
+</code>
+</pre>
+            </div>
+          </div>
+          <div class="row">
+              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#displayData">Display the Data</button>
+            </div>
+          <div class="row">
+            <div id="displayData" class="col card card-body collapse">
+              <h5 class="card-title">Next, create a function that takes the numbers array created in the last function, plus the numbers to represent "fizz" and "buzz". Create a template to display the data, and set up conditions to display "fizz", "buzz", or "fizzBuzz".</h5>
+
+<pre class="line-numbers">
+<code class="language-javascript">
+  //Display the numbers on the page
+  function displayData(numbers, fizz, buzz) {
+      const template = document.getElementById('data-template');
+      const resultsBody = document.getElementById('resultsBody');
+      //put template in html document to allow it to be counted and made dynamic (makes it able to be manipulated like a DOM element)
+      //note that importNode is like cloneNode but allows you to reference a &lt;template> in a different document, as opposed to a &lt;template> in the same document
+      let colCount = template.content.cloneNode(true).querySelectorAll("td").length;
+      //clear the table
+      resultsBody.innerHTML = "";
+
+      //loop over every element in the nubers array
+      //get the value and write it to the page
+      for (let i = 0; i &lt; numbers.length; i += colCount) {
+          let dataRow = template.content.cloneNode(true);
+
+          //Returns an array of columns
+          let cols = dataRow.querySelectorAll("td");
+          //loop over the columns
+          for (let colIndex = 0; colIndex &lt; cols.length; colIndex++) {
+              let value = numbers[i + colIndex];
+              if (typeof value === "undefined") {
+                  value = "";
+              } else if (value % fizz == 0 &amp;&amp; value % buzz == 0) {
+                  cols[colIndex].classList.add("boldIt3");
+                  value = "FizzBuzz";
+              } else if (value % buzz == 0 &amp;&amp; value % fizz != 0) {
+                  cols[colIndex].classList.add("boldIt");
+                  value = "Buzz";
+              } else if (value % fizz == 0 &amp;&amp; value % buzz != 0) {
+                  cols[colIndex].classList.add("boldIt2");
+                  value = "Fizz";
+              }
+              // Note td's use textContent to set content
+              cols[colIndex].textContent = value;
+          }
+          // add the row to the page
+          resultsBody.appendChild(dataRow);
+      }
+  };
+</code>
+</pre>
+            </div>
+          </div>
+           <div class="row">
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#tableTransition">Make the Table Appear</button>
+            </div>
+          <div class="row">
+            <div id="tableTransition" class="col card card-body collapse">
+              <h5 class="card-title">Create a function that will disappear the user form and make the results table appear.</h5>
+<pre class="line-numbers">
+<code class="language-javascript">
+  //disappear form, appear table
+  function tableTransition() {
+      let form = document.getElementById("form-div");
+      let table = document.getElementById("resultDiv");
+      //make form disappear
+      form.classList.add("invisible");
+      //make result table appear with results
+      table.classList.remove("invisible");
+  }
+</code>
+</pre>
+            </div>
+          </div>
+          <div class="row">
+              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#printNumbers">Print the Numbers</button>
+            </div>
+          <div class="row">
+            <div id="printNumbers" class="col card card-body collapse">
+              <h5 class="card-title">Add a "click" event listener to the submit button. When clicked, the function takes the user's chosen range and chosen "fizz" and "buzz" numbers, and calls displayData with these as arguments. It also calls the tableTransition function.</h5>
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  document.getElementById("submitBtn").addEventListener("click", printNumbers)
+
+  //Take user input and print numbers to the page
+  function printNumbers() {
+      //get user inputs for range
+      let startNum = parseInt(document.getElementById("numOne").value);
+      let endNum = parseInt(document.getElementById("numTwo").value);
+      //get user inputs for "fizz" and "buzz" numbers
+      let fizz = parseInt(document.getElementById("fizz").value);
+      let buzz = parseInt(document.getElementById("buzz").value)
+      let numbers = getRange(startNum, endNum);
+      displayData(numbers, fizz, buzz);
+      tableTransition();
+  };
+</code>
+</pre>
+            </div>
+          </div>
+
+      </div>
+    </main>
+<br>
+    <footer class="footer white">
+      <div class="container">
+          <div class="row footer-row">
+              <div class="col-12 footer-social-buttons">
+                      <a href="https://github.com/ssouvall"><i class="nav-icons fab fa-github"></i></a>
+                      <a href="https://twitter.com/SouvallStephen"><i class="nav-icons fab fa-twitter"></i></a>
+                      <a href="https://www.linkedin.com/in/stephen-souvall-bbb77116/"><i class="nav-icons fab fa-linkedin-in"></i></a>
+              </div>
+          </div>
+            <div class="row footer-row">
+              <div class="col-12">
+                  <p>© 2021 <a href="//stephensouvall.com">Stephen Souvall</a> all right reserved</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- PrismJS -->
+    <script src="/js/prism.js"></script>
+    <!-- Custom Scripts -->
+    <script src="/js/superDog.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://superdogevents.coderfoundry.com/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SuperDog Events - A Coding Challenge</title>
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./superdog-array_files/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./superdog-array_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./superdog-array_files/prism-twilight.min.css" integrity="sha512-akb4nfKzpmhujLUyollw5waBPeohuVf0Z5+cL+4Ngc4Db+V8szzx6ZTujguFjpmD076W8LImVIbOblmQ+vZMKA==" crossorigin="anonymous">
+</head>
+
+<body>
+    <!--Insert Menu-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="https://superdogevents.coderfoundry.com/index.html#">SuperDog Events</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://superdogevents.coderfoundry.com/index.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://superdogevents.coderfoundry.com/app.html">The App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://superdogevents.coderfoundry.com/code.html">See The Code</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/CoderFoundry/SuperDogEvents" target="_blank">
+                        Get The
+                        Code
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://coderfoundry.com/" target="_blank">About Coder Foundry</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="dogContainer">
+            <div class="row">
+                <div class="col-sm-7">
+                    <p>
+                        </p><h1>Super Dog Events: A Coding Challenge</h1>
+                        SuperDog Events is an event company the produces comic cons. The marketing team has requested a
+                        site the
+                        displays stats from their events. You are given an array of event data to build a site.
+                        <br><br>
+                        <b>Given an array of objects of event data display the following:</b>
+                        <ul>
+                            <li>Total attendance by City</li>
+
+                            <li>Average Attendance by City</li>
+
+                            <li>Least attended event by City</li>
+
+                            <li>Most attended event by City</li>
+
+                            <li>Show these stats for All Events</li>
+
+                            <li>
+                                Extra Credit: Add the ability to add additional events. Store the events in local
+                                storage or a database.
+                            </li>
+                        </ul>
+                    <p></p>
+                    <p><b>Below is the array of data you are given:</b></p>
+                    <pre class=" language-js">                    <code class=" language-js">
+<span class="token punctuation">[</span><span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">240000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2017"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">250000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2018"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"New York"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">257000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2019"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"San Diego"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">130000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2017"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"San Diego"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">140000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2018"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"ComicCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"San Diego"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">150000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2019"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"HeroesCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"Charlotte"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"North Carolina"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">40000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2017"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"HeroesCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"Charlotte"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"North Carolina"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">45000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2018"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>event<span class="token operator">:</span> <span class="token string">"HeroesCon"</span><span class="token punctuation">,</span>city<span class="token operator">:</span> <span class="token string">"Charlotte"</span><span class="token punctuation">,</span>state<span class="token operator">:</span> <span class="token string">"North Carolina"</span><span class="token punctuation">,</span>attendance<span class="token operator">:</span> <span class="token number">50000</span><span class="token punctuation">,</span>date<span class="token operator">:</span> <span class="token string">"06/01/2019"</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-sm-6 order-first order-md-2">
+                    <img src="./superdog-array_files/SuperDogEventsWebLogosmall.png" class="img-fluid p-2 ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h4>
+                        You can learn to code at Coder Foundry. To learn more visit <a href="https://coderfoundry.com/" target="-blank"> Coder Foundry</a>
+                    </h4>
+                    <p>
+                        Are you a new programmer looking to switch careers, a Computer Science grad working to build a
+                        portfolio, or
+                        a
+                        professional programmer in need of a skills upgrade? Our Full-Stack Immersive Programming
+                        Courses are
+                        designed
+                        to teach you cutting edge, high-demand technologies, so you can launch your new career and adapt
+                        to an
+                        ever-changing, rapidly evolving market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./superdog-array_files/jquery-3.3.1.slim.min.js.download" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="./superdog-array_files/popper.min.js.download" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="./superdog-array_files/bootstrap.min.js.download" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="./superdog-array_files/prism.min.js.download" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous">
+    </script>
+
+
+</body></html>
