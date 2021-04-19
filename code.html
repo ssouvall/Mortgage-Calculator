@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>SuperDog - Stephen Souvall</title>
+    <title>Mortgage Calculator - Stephen Souvall</title>
 
     <link rel="canonical" href="//getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
@@ -45,7 +45,7 @@
                 <a class="nav-link" href="code.html">See The Code <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item nav-animate">
-                <a class="nav-link" href="//github.com/ssouvall/superDog.git">Get The Code</a>
+                <a class="nav-link" href="//github.com/ssouvall/Mortgage-Calculator.git">Get The Code</a>
             </li>
             <li class="nav-item nav-animate">
                 <a class="nav-link" href="about.html">About The Developer</a>
@@ -71,81 +71,72 @@
         <div class="col">
             <hr class="page-break">
         </div>
-        <div class="container">
+        <div class="container code-container bg-dark">
           <div class="row">
-              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#getRange">Get the Range</button>
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#getRange">Get the User Input</button>
             </div>
           <div class="row">
             <div id="getRange" class="col card card-body collapse">
-              <h5 class="card-title">Create a function that takes a start and end number as arguments, and creates an array of numbers containing both arguments and all numbers between them.</h5>
+              <h5 class="card-title">Create a User Input Function.</h5>
+              <p>To begin, a global variable loanArray was created and set to an empty array. A function getUserInput() was then initialized that gathers the input data by getting each input field by ID and saving the data points to a new object. This object is then pushed to the loanArray. Finally, the function calls the getPaymentAmount() function that will be discussed next.</p>
 <pre class="line-numbers">
-<code class="language-javascript">
-  //Gets the range of numbers
-  function getRange(start, end) {
-      let numbersArray = [];
-      for (let i = start; i &lt;= end; i++) {
-          numbersArray.push(i);
-      }
-      return numbersArray;
-  };
-</code>
+<code class="language-javascript">let loanArray = [];
+
+function getUserInput() {
+
+    let obj = {};
+    obj["amount"] = parseInt(document.getElementById("loanAmount").value);
+    obj["term"] = parseInt(document.getElementById("loanTerm").value);
+    obj["rate"] = parseInt(document.getElementById("loanRate").value);
+
+    loanArray.push(obj);
+
+    getPaymentAmount()
+};</code>
 </pre>
             </div>
           </div>
           <div class="row">
-              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#displayData">Display the Data</button>
+              <button class="btn btn-danger form-control code-btn-even" data-toggle="collapse" href="#displayData">Calculate the Total Monthly Payment</button>
             </div>
           <div class="row">
             <div id="displayData" class="col card card-body collapse">
-              <h5 class="card-title">Next, create a function that takes the numbers array created in the last function, plus the numbers to represent "fizz" and "buzz". Create a template to display the data, and set up conditions to display "fizz", "buzz", or "fizzBuzz".</h5>
-
+              <h5 class="card-title">Calculate the Total Monthly Loan Payment</h5>
+              <p>Next, create a function that calculates the total monthly mortgage payment (minus other expenses such as taxes, insurance, HOAs, and PMI). The function initializes the necessary variables, then runs a for loop of the loanArray and assigns the user input values to these variables. These variables are put into the equation payment = (total loan * interest) / (1 - Math.pow(1 + interestRate, -months)) to get the total monthly payment value. The function connect this value to the payment field in the stats div by id, then saves all variables to an object and passes this object to the buildPaymentSchedule() function.</p>
 <pre class="line-numbers">
-<code class="language-javascript">
-  //Display the numbers on the page
-  function displayData(numbers, fizz, buzz) {
-      const template = document.getElementById('data-template');
-      const resultsBody = document.getElementById('resultsBody');
-      //put template in html document to allow it to be counted and made dynamic (makes it able to be manipulated like a DOM element)
-      //note that importNode is like cloneNode but allows you to reference a &lt;template> in a different document, as opposed to a &lt;template> in the same document
-      let colCount = template.content.cloneNode(true).querySelectorAll("td").length;
-      //clear the table
-      resultsBody.innerHTML = "";
+<code class="language-javascript">function getPaymentAmount() {
+    let loanAmount = 0;
+    let monthlyPayment = 0;
+    let interestRate = 0;
+    let months = 0;
 
-      //loop over every element in the nubers array
-      //get the value and write it to the page
-      for (let i = 0; i &lt; numbers.length; i += colCount) {
-          let dataRow = template.content.cloneNode(true);
+    for (let i = 0; i < loanArray.length; i++) {
+        loanAmount = loanArray[i].amount;
+        interestRate = (loanArray[i].rate) / 100 / 12;
+        months = (loanArray[i].term) * 12;
+    };
 
-          //Returns an array of columns
-          let cols = dataRow.querySelectorAll("td");
-          //loop over the columns
-          for (let colIndex = 0; colIndex &lt; cols.length; colIndex++) {
-              let value = numbers[i + colIndex];
-              if (typeof value === "undefined") {
-                  value = "";
-              } else if (value % fizz == 0 &amp;&amp; value % buzz == 0) {
-                  cols[colIndex].classList.add("boldIt3");
-                  value = "FizzBuzz";
-              } else if (value % buzz == 0 &amp;&amp; value % fizz != 0) {
-                  cols[colIndex].classList.add("boldIt");
-                  value = "Buzz";
-              } else if (value % fizz == 0 &amp;&amp; value % buzz != 0) {
-                  cols[colIndex].classList.add("boldIt2");
-                  value = "Fizz";
-              }
-              // Note td's use textContent to set content
-              cols[colIndex].textContent = value;
-          }
-          // add the row to the page
-          resultsBody.appendChild(dataRow);
-      }
-  };
-</code>
+    monthlyPayment = (loanAmount * interestRate) / (1 - Math.pow(1 + interestRate, -months))
+
+    document.getElementById("monthlyPayment").innerHTML = `$${monthlyPayment.toLocaleString(
+        undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })}`;
+
+    let loanInfo = {
+        monthlyPayment: monthlyPayment,
+        interestRate: interestRate,
+        term: months,
+        loanBalance: loanAmount
+    };
+    buildPaymentSchedule(loanInfo);
+};</code>
 </pre>
             </div>
           </div>
            <div class="row">
-              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#tableTransition">Make the Table Appear</button>
+              <button class="btn btn-danger form-control code-btn-odd" data-toggle="collapse" href="#tableTransition"></button>
             </div>
           <div class="row">
             <div id="tableTransition" class="col card card-body collapse">
@@ -221,6 +212,6 @@
     <!-- PrismJS -->
     <script src="/js/prism.js"></script>
     <!-- Custom Scripts -->
-    <script src="/js/superDog.js"></script>
+    <script src="/js/mortgage.js"></script>
   </body>
 </html>

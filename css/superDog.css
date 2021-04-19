@@ -49,14 +49,6 @@ h5 {
   margin-top: 5%;
 }
 
-#deleteButton {
-  background-color: #6c757d;
-}
-
-#delete {
-  text-align: right;
-}
-
 .btn:hover {
   background-color: #333;
 }
@@ -134,30 +126,6 @@ nav li {
 
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  line-height: 30px;
-  background-color: #333;
-  text-align: center;
-}
-
-.footer p {
-  color: #fff;
-  font-size: 14px;
-  margin: 0;
-}
-
-.footer-social-buttons {
-  width: 50rem;
-}
-
-#footer-link {
-  color: #056CF2;
-}
-
 .nav-social-buttons a {
   margin-right: 1rem;
 }
@@ -179,6 +147,11 @@ body>.container {
 
 code {
   font-size: 80%;
+}
+
+.code-container {
+  border-radius: 10px;
+  padding: 1% 5% 5%;
 }
 
 .headshot-div {
@@ -261,4 +234,28 @@ code {
 
 table {
   max-width: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  line-height: 30px;
+  background-color: #333;
+  text-align: center;
+}
+
+.footer p {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer-social-buttons {
+  width: 50rem;
+}
+
+#footer-link {
+  color: #056CF2;
 }

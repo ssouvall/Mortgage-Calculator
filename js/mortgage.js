@@ -28,16 +28,16 @@ function getPaymentAmount() {
         months = (loanArray[i].term) * 12;
     };
 
-    // monthlyPayment = loanAmount * interestRate * (Math.pow(1 + interestRate, months)) / (Math.pow(1 + interestRate, months) - 1);
-
     monthlyPayment = (loanAmount * interestRate) / (1 - Math.pow(1 + interestRate, -months))
 
     //post monthly payment to app table
-    document.getElementById("monthlyPayment").innerHTML = `$${monthlyPayment.toLocaleString(
+    document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toLocaleString(
         undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-        })}`;
+            style: 'currency',
+            currency: 'USD',
+        });
 
     let loanInfo = {
         monthlyPayment: monthlyPayment,
@@ -99,36 +99,42 @@ function displayData(array) {
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
             }
         );
         dataRow.getElementById("principal").textContent = (array[i].principalPayment).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
             }
         );
         dataRow.getElementById("interest").textContent = (array[i].monthlyInterest).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
             }
         );
         dataRow.getElementById("tot_interest").textContent = (array[i].totalInterest).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
             }
         );
         dataRow.getElementById("balance").textContent = (array[i].loanBalance).toLocaleString(
             undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'USD',
             }
         );
-
-        if (array[i].loanBalance < 0.01) {
-            array[i].loanBalance = +0.00;
-        }
 
         resultsBody.appendChild(dataRow);
     };
